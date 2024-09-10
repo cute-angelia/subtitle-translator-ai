@@ -54,3 +54,9 @@ $ go build -o sta .
 $ go build -o sta.exe .
 ```
 
+5. run
+
+```
+go run main.go -i /Users/vanilla/Downloads/consent.\(2023\).eng.1cd.\(9907721\)\ 2/Le.Consentement.2023.1080p.Bluray.DDP\ 5.1.x264.en.srt -o /Users/vanilla/Downloads/1.srt -f config.yaml
+
+```

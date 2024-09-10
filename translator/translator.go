@@ -2,7 +2,9 @@ package translator
 
 import (
 	"log"
+	"subtitle-translator-ai/translator/baidu"
 	"subtitle-translator-ai/translator/openai"
+	"subtitle-translator-ai/translator/tencent"
 	"subtitle-translator-ai/utils/xlog"
 )
 
@@ -14,6 +16,27 @@ type TranslatorClient interface {
 type Translator struct {
 	Engine string
 	Client TranslatorClient
+}
+
+func NewBaiduTranslator(appid, secret string) (*Translator, error) {
+	client := baidu.NewClient(appid, secret)
+	return &Translator{
+		Engine: "OpenAI",
+		Client: client,
+	}, nil
+}
+
+// NewTencentTranslator 腾讯翻译
+// https://cloud.tencent.com/document/api/551/15619#SDK
+func NewTencentTranslator(appid, secret string) (*Translator, error) {
+	if client, err := tencent.NewClient(appid, secret); err != nil {
+		return nil, err
+	} else {
+		return &Translator{
+			Engine: "Tencent",
+			Client: client,
+		}, nil
+	}
 }
 
 func MustNewOpenAITranslator(openaiKey, proxy string) *Translator {

@@ -94,6 +94,10 @@ func Run() {
 	} else if engine == "Google" {
 		log.Println(xlog.Warn("Google翻译暂未上线"))
 		os.Exit(1)
+	} else if engine == "Baidu" {
+		transEngine, _ = translator.NewBaiduTranslator(viper.GetString("BaiduAppID"), viper.GetString("BaiduSecretKey"))
+	} else if engine == "Tencent" {
+		transEngine, _ = translator.NewTencentTranslator(viper.GetString("TxAppId"), viper.GetString("TxSecretKey"))
 	} else {
 		log.Fatalf("不支持的翻译引擎: %s", xlog.Fatal(engine))
 	}
